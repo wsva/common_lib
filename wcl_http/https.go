@@ -21,6 +21,15 @@ type HttpsServer struct {
 	ServerKeyFile string `json:"ServerKeyFile"`
 }
 
+/*
+ListenAndServeTLS is used for TLS authentication
+
+在Oracle Linux 6系列服务器上，curl、wget都不支持TLS v1.0，只能支持SSLv3
+但是因为安全问题，目前https服务普遍都不支持SSLv3了，导致在这些老操作系统上，不能使用https
+nginx也是如此
+
+如果一定要用curl访问，建议同时开启http服务
+*/
 func (s *HttpsServer) ListenAndServe(handler http.Handler) error {
 	server := &http.Server{
 		Addr:    ":" + s.Port,
