@@ -14,6 +14,7 @@ func Listen(addr string) (*net.TCPListener, error) {
 	return listener, nil
 }
 
+// addr: ip:port
 func Dial(addr string) (*net.TCPConn, error) {
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
